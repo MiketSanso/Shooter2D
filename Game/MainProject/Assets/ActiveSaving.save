@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<XMLFile xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <saveName>ActiveSaving</saveName>
+  <idInventoryGuns>
+    <string>stg-44</string>
+  </idInventoryGuns>
+  <xCellIndexGuns>
+    <int>2</int>
+  </xCellIndexGuns>
+  <yCellIndexGuns>
+    <int>9</int>
+  </yCellIndexGuns>
+  <indexCellGun />
+  <isStayedInMainCell>
+    <boolean>true</boolean>
+  </isStayedInMainCell>
+</XMLFile>
