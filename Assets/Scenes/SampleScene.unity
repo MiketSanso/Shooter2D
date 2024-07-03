@@ -38,6 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -270,7 +271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   localCellAmmunType: 5
   inventory: {fileID: 0}
-  indexGun: 0
+  indexGunCell: 0
   isFree: 0
 --- !u!1 &143968663
 GameObject:
@@ -799,7 +800,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   localCellAmmunType: 0
   inventory: {fileID: 0}
-  indexGun: 0
+  indexGunCell: 0
   isFree: 0
 --- !u!1 &469153454
 GameObject:
@@ -1397,7 +1398,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   localCellAmmunType: 1
   inventory: {fileID: 0}
-  indexGun: 1
+  indexGunCell: -1
   isFree: 0
 --- !u!114 &529788468
 MonoBehaviour:
@@ -2015,7 +2016,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   localCellAmmunType: 4
   inventory: {fileID: 0}
-  indexGun: 0
+  indexGunCell: 0
   isFree: 0
 --- !u!1 &761638041
 GameObject:
@@ -2460,7 +2461,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.34833333, y: 0.5}
   m_AnchorMax: {x: 0.48520836, y: 0.9843334}
-  m_AnchoredPosition: {x: -0.8999939, y: -1.3399658}
+  m_AnchoredPosition: {x: -0.9000244, y: -1.3399658}
   m_SizeDelta: {x: -2.1600037, y: -2.5999756}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &870488289
@@ -2515,7 +2516,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   localCellAmmunType: 1
   inventory: {fileID: 0}
-  indexGun: 2
+  indexGunCell: -2
   isFree: 0
 --- !u!114 &870488292
 MonoBehaviour:
@@ -7035,9 +7036,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeSave:
     saveName: ActiveSaving
-    idInventoryGuns: []
-    xCellIndexGuns: 
-    yCellIndexGuns: 
+    idInventoryItems: []
+    xCellIndexItems: 
+    yCellIndexItems: 
     indexCellGun: 
     isStayedInMainCell: 
 --- !u!1 &1934604832

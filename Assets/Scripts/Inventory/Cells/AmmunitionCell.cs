@@ -8,7 +8,7 @@ public class AmmunitionCell : MonoBehaviour, IDropHandler
     [HideInInspector] public AmmunType cellAmmunType { get { return localCellAmmunType; }  }
 
     public Inventory inventory;
-    public int indexGun;
+    public int indexGunCell;
 
     [HideInInspector] public bool isFree;
 

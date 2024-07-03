@@ -46,11 +46,10 @@ public abstract class InventoryItem : Item, IBeginDragHandler, IEndDragHandler, 
         canvasGroup.alpha = 1;
         canvasGroup.blocksRaycasts = true;
         PlayerPrefs.SetInt("sizeDraggenItem", 0);
-    }
-    public virtual void OnDrop(PointerEventData eventData)
-    {
+
         SaveObject();
     }
+    public abstract void OnDrop(PointerEventData eventData);
 
     public Vector2Int GetSize()
     {
@@ -91,32 +90,33 @@ public abstract class InventoryItem : Item, IBeginDragHandler, IEndDragHandler, 
 
     public virtual void SaveObject()
     {
-        SaveManager.saveMg.activeSave.idInventoryGuns.Add(id);
+        SaveManager.saveMg.activeSave.idInventoryItems.Add(id);
 
         if (prevMainCell != null)
         {
-            SaveManager.saveMg.activeSave.xCellIndexGuns.Add(prevMainCell.x);
-            SaveManager.saveMg.activeSave.yCellIndexGuns.Add(prevMainCell.y);
+            SaveManager.saveMg.activeSave.xCellIndexItems.Add(prevMainCell.x);
+            SaveManager.saveMg.activeSave.yCellIndexItems.Add(prevMainCell.y);
             SaveManager.saveMg.activeSave.isStayedInMainCell.Add(true);
             SaveManager.saveMg.Save();
         }
-    }
+    } 
 
     public virtual void DeleteObject()
     {
-        if (prevMainCell != null)
+        if (prevMainCell != null && SaveManager.saveMg.activeSave.xCellIndexItems.Count != 0)
         {
-            int stepInLists = 0; //ьс -1
+            int stepInLists = -1;
             do
             {
                 stepInLists++;
             }
-            while (SaveManager.saveMg.activeSave.xCellIndexGuns[stepInLists] == prevMainCell.x && SaveManager.saveMg.activeSave.yCellIndexGuns[stepInLists] == prevMainCell.y);
+            while (SaveManager.saveMg.activeSave.xCellIndexItems[stepInLists] != prevMainCell.x && SaveManager.saveMg.activeSave.yCellIndexItems[stepInLists] != prevMainCell.y);
 
-            SaveManager.saveMg.activeSave.xCellIndexGuns.RemoveAt(stepInLists);
-            SaveManager.saveMg.activeSave.yCellIndexGuns.RemoveAt(stepInLists);
+            SaveManager.saveMg.activeSave.xCellIndexItems.RemoveAt(stepInLists);
+            SaveManager.saveMg.activeSave.yCellIndexItems.RemoveAt(stepInLists);
             SaveManager.saveMg.activeSave.isStayedInMainCell.RemoveAt(stepInLists);
+            SaveManager.saveMg.activeSave.idInventoryItems.RemoveAt(stepInLists);
             SaveManager.saveMg.Save();
         }
-    } 
+    }  
 }

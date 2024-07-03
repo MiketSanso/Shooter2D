@@ -1,5 +1,4 @@
 using System;
-using System.Reflection;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -114,14 +113,12 @@ public class ItemAmmunition : InventoryItem
             SaveManager.saveMg.activeSave.isStayedInMainCell.Add(false);
 
             if (itemAmmunType == AmmunType.Gun)
-       //        SaveManager.saveMg.activeSave.indexCellGun.Add(prevAmmunitionCell.indexGun);
-        //    else
-        //        SaveManager.saveMg.activeSave.indexCellGun.Add(Array.IndexOf(Enum.GetValues(prevAmmunitionCell.cellAmmunType.GetType()), prevAmmunitionCell.cellAmmunType));
-
-                    // Це ис хуйня, которую нужно переделать
+                SaveManager.saveMg.activeSave.indexCellGun.Add(prevAmmunitionCell.indexGunCell);
+            else
+                SaveManager.saveMg.activeSave.indexCellGun.Add(Array.IndexOf(Enum.GetValues(prevAmmunitionCell.cellAmmunType.GetType()), prevAmmunitionCell.cellAmmunType));
         }
         SaveManager.saveMg.Save();
-    }
+    } 
 
     public override void DeleteObject()
     {
@@ -129,15 +126,17 @@ public class ItemAmmunition : InventoryItem
 
         if (prevAmmunitionCell != null)
         {
-            for (int x = 0; x < prevAmmunitionCell.; x++)
+            int stepInLists = 0;
+         /*   do
             {
-
+                stepInLists++;
             }
+            while ((SaveManager.saveMg.activeSave.indexCellGun[stepInLists] != Array.IndexOf(Enum.GetValues(prevAmmunitionCell.cellAmmunType.GetType()), prevAmmunitionCell.cellAmmunType) && SaveManager.saveMg.activeSave.indexCellGun[stepInLists] > 0) ||  SaveManager.saveMg.activeSave.indexCellGun[stepInLists] != prevAmmunitionCell.indexGunCell); */
 
-            SaveManager.saveMg.activeSave.xCellIndexGuns.RemoveAt(stepInLists);
-            SaveManager.saveMg.activeSave.yCellIndexGuns.RemoveAt(stepInLists);
-            SaveManager.saveMg.activeSave.isStayedInMainCell.RemoveAt(stepInLists);
+            SaveManager.saveMg.activeSave.isStayedInMainCell.RemoveAt(stepInLists); 
+            SaveManager.saveMg.activeSave.idInventoryItems.RemoveAt(stepInLists);
+            SaveManager.saveMg.activeSave.indexCellGun.RemoveAt(stepInLists);
             SaveManager.saveMg.Save();
-        }
-    }
+       } 
+    } 
 }

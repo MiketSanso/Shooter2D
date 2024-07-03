@@ -41,8 +41,8 @@ public class SaveManager : MonoBehaviour
         public string saveName = "ActiveSave";
 
         //Inventory
-        public List<string> idInventoryGuns;
-        public List<int> xCellIndexGuns, yCellIndexGuns, indexCellGun;
+        public List<string> idInventoryItems;
+        public List<int> xCellIndexItems, yCellIndexItems, indexCellGun;
         public List<bool> isStayedInMainCell;
 
     }
