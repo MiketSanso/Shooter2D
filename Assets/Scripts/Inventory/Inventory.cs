@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class Inventory : MonoBehaviour
 {
     [SerializeField] private Transform transformCell;
     [SerializeField] private MainCell cellInventory;
+
+    [SerializeField] private GridLayoutGroup grid;
 
     public MainCell[,] cells;
 
@@ -31,25 +34,10 @@ public abstract class Inventory : MonoBehaviour
                 cells[x, y] = newCell;
             }
         }
-    } 
 
-     /* TestRegion(DontGameplay)
-    public void Update()
-    {
-        for (int y = 0; y < sizeY; y++)
-        {
-            for (int x = 0; x < sizeX; x++)
-            {
-                if (cells[x, y].isFree)
-                {
-                    cells[x, y].image.color = Color.white;
-                }
-                else
-                {
-                    cells[x, y].image.color = Color.red;
-                }
-            }
-        }
+        grid.CalculateLayoutInputHorizontal();
+        grid.CalculateLayoutInputVertical();
+        grid.SetLayoutHorizontal();
+        grid.SetLayoutVertical();
     }
-    */
 }

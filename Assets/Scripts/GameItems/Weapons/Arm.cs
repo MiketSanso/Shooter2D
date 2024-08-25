@@ -1,6 +1,4 @@
-using System.Collections;
 using UnityEngine;
-using static DamageSettings;
 
 public class Arm : Weapon
 {
@@ -10,6 +8,6 @@ public class Arm : Weapon
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.TryGetComponent<IDamageable>(out var damageable))//&&)
-            damageable.Damage(radiation, rupture, toxic, bleeding, bulletproof, damage*3, true, false, false, isToxic, isRadiation);
+            damageable.Damage(damage*3);
     }
 }

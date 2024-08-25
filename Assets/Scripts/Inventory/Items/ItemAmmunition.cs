@@ -23,7 +23,7 @@ public class ItemAmmunition : InventoryItem
     {
         base.OnEndDrag(eventData);
 
-        if (eventData.pointerEnter.GetComponent<MainCell>() && prevMainCell || !eventData.pointerEnter.GetComponent<AmmunitionCell>() && prevMainCell || eventData.pointerEnter.GetComponent<AmmunitionCell>() && !eventData.pointerEnter.GetComponent<AmmunitionCell>().isFree && prevMainCell)
+        if (eventData.pointerEnter == null && prevMainCell || eventData.pointerEnter.GetComponent<MainCell>() && prevMainCell || !eventData.pointerEnter.GetComponent<AmmunitionCell>() && prevMainCell || eventData.pointerEnter.GetComponent<AmmunitionCell>() && !eventData.pointerEnter.GetComponent<AmmunitionCell>().isFree && prevMainCell)
         {
             SetPosition(this, prevMainCell, null);
             prevMainCell.CellOccupation(prevMainCell, false, size);
@@ -33,6 +33,7 @@ public class ItemAmmunition : InventoryItem
             SetPosition(this, null, prevAmmunitionCell);
             prevAmmunitionCell.isFree = false;
         }
+        SaveObject();
     }
 
     public override void OnDrop(PointerEventData eventData)
@@ -110,33 +111,31 @@ public class ItemAmmunition : InventoryItem
 
         if (prevAmmunitionCell != null)
         {
-            SaveManager.saveMg.activeSave.isStayedInMainCell.Add(false);
+            SaveManager.saveMg.activeSave.idInventoryItemsInAmmunitionCell.Add(id);
 
             if (itemAmmunType == AmmunType.Gun)
-                SaveManager.saveMg.activeSave.indexCellGun.Add(prevAmmunitionCell.indexGunCell);
+                SaveManager.saveMg.activeSave.indexAmmunitionCell.Add(prevAmmunitionCell.indexGunCell);
             else
-                SaveManager.saveMg.activeSave.indexCellGun.Add(Array.IndexOf(Enum.GetValues(prevAmmunitionCell.cellAmmunType.GetType()), prevAmmunitionCell.cellAmmunType));
+                SaveManager.saveMg.activeSave.indexAmmunitionCell.Add(Array.IndexOf(Enum.GetValues(prevAmmunitionCell.cellAmmunType.GetType()), prevAmmunitionCell.cellAmmunType));
         }
         SaveManager.saveMg.Save();
-    } 
+    }
 
     public override void DeleteObject()
     {
         base.DeleteObject();
-
         if (prevAmmunitionCell != null)
         {
-            int stepInLists = 0;
-         /*   do
+            for (int i = 0; i < SaveManager.saveMg.activeSave.indexAmmunitionCell.Count; i++)
             {
-                stepInLists++;
+                if (SaveManager.saveMg.activeSave.indexAmmunitionCell[i] == Array.IndexOf(Enum.GetValues(prevAmmunitionCell.cellAmmunType.GetType()), prevAmmunitionCell.cellAmmunType) && SaveManager.saveMg.activeSave.indexAmmunitionCell[i] > 0 || SaveManager.saveMg.activeSave.indexAmmunitionCell[i] == prevAmmunitionCell.indexGunCell)
+                {
+                    SaveManager.saveMg.activeSave.idInventoryItemsInAmmunitionCell.RemoveAt(i);
+                    SaveManager.saveMg.activeSave.indexAmmunitionCell.RemoveAt(i);
+                    SaveManager.saveMg.Save();
+                    break;
+                }
             }
-            while ((SaveManager.saveMg.activeSave.indexCellGun[stepInLists] != Array.IndexOf(Enum.GetValues(prevAmmunitionCell.cellAmmunType.GetType()), prevAmmunitionCell.cellAmmunType) && SaveManager.saveMg.activeSave.indexCellGun[stepInLists] > 0) ||  SaveManager.saveMg.activeSave.indexCellGun[stepInLists] != prevAmmunitionCell.indexGunCell); */
-
-            SaveManager.saveMg.activeSave.isStayedInMainCell.RemoveAt(stepInLists); 
-            SaveManager.saveMg.activeSave.idInventoryItems.RemoveAt(stepInLists);
-            SaveManager.saveMg.activeSave.indexCellGun.RemoveAt(stepInLists);
-            SaveManager.saveMg.Save();
-       } 
-    } 
+        }
+    }
 }

@@ -2,6 +2,6 @@ using UnityEngine;
 
 public class PrefabsManager : MonoBehaviour 
 {
-    public GameObject[] gunsPrefabsInvetory;
+    public GameObject[] itemsPrefabsInvetory;
     public GameObject[] gunsUsable;
 }

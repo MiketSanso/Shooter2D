@@ -2,10 +2,8 @@ using UnityEngine;
 using System.Collections;
 
 public abstract class Weapon : Item
-#warning Or GameItem
 {
-    public float damage, toxic, bleeding, bulletproof, rupture, radiation;
-    public bool isToxic, isRadiation;
+    public float damage;
 
     public AudioClip audioClipShoot;
     public AudioSource audioSource;

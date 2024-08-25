@@ -1,13 +1,10 @@
 using UnityEngine;
-using UnityEngine.UI; //I need this for tests in Update
 using UnityEngine.EventSystems;
 
 public class AmmunitionCell : MonoBehaviour, IDropHandler
 {
     [SerializeField] private AmmunType localCellAmmunType;
     [HideInInspector] public AmmunType cellAmmunType { get { return localCellAmmunType; }  }
-
-    public Inventory inventory;
     public int indexGunCell;
 
     [HideInInspector] public bool isFree;
@@ -65,11 +62,4 @@ public class AmmunitionCell : MonoBehaviour, IDropHandler
             dragItem.prevMainCell.CellOccupation(dragItem.prevMainCell, false, dragItem.size);
         }
     }
-/*    public void Update()
-    {
-        if (isFree)
-            gameObject.GetComponent<Image>().color = Color.red;
-        else
-            gameObject.GetComponent<Image>().color = Color.green;
-    }*/
 }

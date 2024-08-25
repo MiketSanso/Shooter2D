@@ -1,17 +1,22 @@
 <?xml version="1.0"?>
 <XMLFile xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <saveName>ActiveSaving</saveName>
-  <idInventoryItems>
-    <string>stg-44</string>
-  </idInventoryItems>
+  <idInventoryItemsInMainCell>
+    <string>7.92×33</string>
+  </idInventoryItemsInMainCell>
   <xCellIndexItems>
     <int>0</int>
   </xCellIndexItems>
   <yCellIndexItems>
     <int>0</int>
   </yCellIndexItems>
-  <indexCellGun />
-  <isStayedInMainCell>
-    <boolean>true</boolean>
-  </isStayedInMainCell>
+  <countObjectsInPack>
+    <int>79</int>
+  </countObjectsInPack>
+  <idInventoryItemsInAmmunitionCell>
+    <string>stg-44</string>
+  </idInventoryItemsInAmmunitionCell>
+  <indexAmmunitionCell>
+    <int>-1</int>
+  </indexAmmunitionCell>
 </XMLFile>

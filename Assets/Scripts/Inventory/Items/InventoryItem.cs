@@ -9,14 +9,12 @@ public abstract class InventoryItem : Item, IBeginDragHandler, IEndDragHandler, 
     public Canvas canvas;
 
     public MainCell prevMainCell;
-    [HideInInspector] public AmmunitionCell prevAmmunitionCell;
+     public AmmunitionCell prevAmmunitionCell;
 
     [HideInInspector] public float postIndex = 31.25f;
 
     public ItemSize itemSize;
     [HideInInspector] public Vector2Int size;
-
-    public PlayerInventory plInv;
 
 
     public void Awake()
@@ -46,8 +44,6 @@ public abstract class InventoryItem : Item, IBeginDragHandler, IEndDragHandler, 
         canvasGroup.alpha = 1;
         canvasGroup.blocksRaycasts = true;
         PlayerPrefs.SetInt("sizeDraggenItem", 0);
-
-        SaveObject();
     }
     public abstract void OnDrop(PointerEventData eventData);
 
@@ -90,13 +86,15 @@ public abstract class InventoryItem : Item, IBeginDragHandler, IEndDragHandler, 
 
     public virtual void SaveObject()
     {
-        SaveManager.saveMg.activeSave.idInventoryItems.Add(id);
-
         if (prevMainCell != null)
         {
+            SaveManager.saveMg.activeSave.idInventoryItemsInMainCell.Add(id);
+
+            if (GetComponent<ItemAmmunition>())
+                SaveManager.saveMg.activeSave.countObjectsInPack.Add(0);
+
             SaveManager.saveMg.activeSave.xCellIndexItems.Add(prevMainCell.x);
             SaveManager.saveMg.activeSave.yCellIndexItems.Add(prevMainCell.y);
-            SaveManager.saveMg.activeSave.isStayedInMainCell.Add(true);
             SaveManager.saveMg.Save();
         }
     } 
@@ -105,18 +103,18 @@ public abstract class InventoryItem : Item, IBeginDragHandler, IEndDragHandler, 
     {
         if (prevMainCell != null && SaveManager.saveMg.activeSave.xCellIndexItems.Count != 0)
         {
-            int stepInLists = -1;
-            do
+            for (int i = 0; i < SaveManager.saveMg.activeSave.xCellIndexItems.Count; i++)
             {
-                stepInLists++;
+                if (SaveManager.saveMg.activeSave.xCellIndexItems[i] == prevMainCell.x && SaveManager.saveMg.activeSave.yCellIndexItems[i] == prevMainCell.y)
+                {
+                    SaveManager.saveMg.activeSave.xCellIndexItems.RemoveAt(i);
+                    SaveManager.saveMg.activeSave.yCellIndexItems.RemoveAt(i);
+                    SaveManager.saveMg.activeSave.idInventoryItemsInMainCell.RemoveAt(i);
+                    SaveManager.saveMg.activeSave.countObjectsInPack.RemoveAt(i);
+                    SaveManager.saveMg.Save();
+                    break;
+                }    
             }
-            while (SaveManager.saveMg.activeSave.xCellIndexItems[stepInLists] != prevMainCell.x && SaveManager.saveMg.activeSave.yCellIndexItems[stepInLists] != prevMainCell.y);
-
-            SaveManager.saveMg.activeSave.xCellIndexItems.RemoveAt(stepInLists);
-            SaveManager.saveMg.activeSave.yCellIndexItems.RemoveAt(stepInLists);
-            SaveManager.saveMg.activeSave.isStayedInMainCell.RemoveAt(stepInLists);
-            SaveManager.saveMg.activeSave.idInventoryItems.RemoveAt(stepInLists);
-            SaveManager.saveMg.Save();
         }
     }  
 }

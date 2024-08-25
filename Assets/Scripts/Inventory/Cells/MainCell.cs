@@ -33,9 +33,13 @@ public class MainCell : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
             Sprite colorCell = CheckCellFree(this, new Vector2Int(sizeDraggenItem/10, sizeDraggenItem-sizeDraggenItem/10*10)) ? greenCell : redCell;
 
             for (int y1 = y; y1 < y + (sizeDraggenItem - sizeDraggenItem / 10 * 10); y1++)
+            {
                 for (int x1 = x; x1 < x + sizeDraggenItem / 10; x1++)
-                    if (x1 <= inventory.cells.GetLength(0)-1 && y1 <= inventory.cells.GetLength(1)-1)
+                {
+                    if (x1 <= inventory.cells.GetLength(0) - 1 && y1 <= inventory.cells.GetLength(1) - 1)
                         inventory.cells[x1, y1].image.sprite = colorCell;
+                }
+            }
         }
     }
     public void OnPointerExit(PointerEventData eventData)
@@ -43,9 +47,13 @@ public class MainCell : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         if (sizeDraggenItem != 0)
         {
             for (int y1 = y; y1 < y + (sizeDraggenItem - sizeDraggenItem / 10 * 10); y1++)
+            {
                 for (int x1 = x; x1 < x + sizeDraggenItem / 10; x1++)
-                    if (x1 <= inventory.cells.GetLength(0)-1 && y1 <= inventory.cells.GetLength(1)-1)
+                {
+                    if (x1 <= inventory.cells.GetLength(0) - 1 && y1 <= inventory.cells.GetLength(1) - 1)
                         inventory.cells[x1, y1].image.sprite = whiteCell;
+                }
+            }
         }
     } 
 
